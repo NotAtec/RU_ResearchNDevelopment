@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_17_110621) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_17_111706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,8 +34,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_110621) do
     t.boolean "player2_accepted", default: false
     t.integer "player1_correct", default: 0
     t.integer "player2_correct", default: 0
+    t.bigint "current_question_id"
+    t.integer "history", default: [], array: true
+    t.index ["current_question_id"], name: "index_games_on_current_question_id"
     t.index ["player1_id"], name: "index_games_on_player1_id"
     t.index ["player2_id"], name: "index_games_on_player2_id"
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.string "text"
+    t.boolean "correct"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "question_id"
+    t.index ["question_id"], name: "index_options_on_question_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -53,6 +71,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_110621) do
 
   add_foreign_key "friend_requests", "users", column: "requestee_id"
   add_foreign_key "friend_requests", "users", column: "requester_id"
+  add_foreign_key "games", "questions", column: "current_question_id"
   add_foreign_key "games", "users", column: "player1_id"
   add_foreign_key "games", "users", column: "player2_id"
+  add_foreign_key "options", "questions"
 end

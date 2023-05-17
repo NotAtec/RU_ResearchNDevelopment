@@ -5,4 +5,7 @@ class Game < ApplicationRecord
   validates :player2, presence: true
   validates :player1_score, presence: true
   validates :player2_score, presence: true
+  validates :current_question, presence: true
+
+  
 end
