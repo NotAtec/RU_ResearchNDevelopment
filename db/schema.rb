@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_17_102420) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_17_110621) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_102420) do
   create_table "games", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "player1_id"
+    t.bigint "player2_id"
+    t.integer "player1_score"
+    t.integer "player2_score"
+    t.boolean "player2_accepted", default: false
+    t.integer "player1_correct", default: 0
+    t.integer "player2_correct", default: 0
+    t.index ["player1_id"], name: "index_games_on_player1_id"
+    t.index ["player2_id"], name: "index_games_on_player2_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,4 +53,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_17_102420) do
 
   add_foreign_key "friend_requests", "users", column: "requestee_id"
   add_foreign_key "friend_requests", "users", column: "requester_id"
+  add_foreign_key "games", "users", column: "player1_id"
+  add_foreign_key "games", "users", column: "player2_id"
 end
