@@ -1,1 +1,38 @@
-test
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <div class="columns">
+        <div class="column is-3">
+          <div class="tile is-child has-background-primary">
+            <%= image_tag('TrivAI_logo_RD.png', width: "100%") %>
+          </div>
+        </div>
+
+        <div class="column is-6 has-text-centered has-background-danger">
+              <h1 class="title is-size-1">TrivAI</p>
+        </div>
+
+        <div class="column">
+          <div class='button is_primary'>
+            <p> Insert logo </p>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class='button is_primary'>
+            <p> Insert logo </p>
+          </div>
+        </div>
+
+    </div>
+
+    <%= yield %>
+  </body>
+</html>
