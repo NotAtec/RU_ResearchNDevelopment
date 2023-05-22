@@ -8,7 +8,9 @@
   </head>
 
   <body>
-    <div class="columns is-vcentered">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <div class="columns is-vcentered is-8">
         <div class="column is-3 has-background-primary">
           <%= image_tag('TrivAI_logo_RD.png', width: "100%") %>
         </div>
@@ -17,18 +19,36 @@
               <h1 class="title is-size-1">TrivAI</p>
         </div>
 
-        <div class="column">
-          <div class='button is_primary'>
-            <p> Insert logo </p>
-          </div>
+        <div class="column has-background-primary">
+          <button class="button is-large is-link">
+            <span class="icon is-small">
+              <%= image_tag('icons/friends.svg', width: "100%") %>
+            </span>
         </div>
 
-        <div class="column">
-          <div class='button is_primary'>
-            <p> Insert logo </p>
-          </div>
+
+        <div class="column has-background-primary">
+          <button class="button is-large is-link">
+            <span class="icon is-small">
+              <%= image_tag('icons/settings.svg', width: "100%") %>
+            </span>
         </div>
 
+    </div>
+
+    <div class='columns is-8'>
+      <div class="column ">
+      </div>
+      <div class='column is-half has-text-centered has-background-danger'>
+        <form class='mb-4'>
+          <h1>Type a subject for your game</h1>
+          <input type="Text" name="subject" value="...">
+        </form>
+
+        <button class='button is-large'>
+          Enter
+        </button>
+      </div>
     </div>
     
     <%= yield %>
