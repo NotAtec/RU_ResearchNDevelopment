@@ -37,3 +37,35 @@
 // @import "bulma/sass/layout/section.sass";
 
 @import 'bulma/bulma';
+
+$white-ish: #f5f5f5;
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body>footer {
+  margin-top: auto;
+  padding: 1.5rem;
+  background-color: $white-ish;
+}
+
+.notification:not(:last-child) {
+  margin-bottom: 0;
+  animation: moveout 1s 1s ease forwards;
+  position: absolute;
+  width: 100vw;
+  z-index: 31;
+}
+
+@keyframes moveout {
+  from {
+    top: 0px;
+  }
+
+  to {
+    top: -4rem;
+  }
+}
