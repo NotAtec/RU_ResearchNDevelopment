@@ -16,14 +16,15 @@
                   label_html: { class: "label" } %>
             </div>
           </div>
+          <br>
           <div class="field">
             <div class="control">
               <%= f.button :submit, "Resend unlock instructions", class: "button is-primary" %>
             </div>
           </div>
         <% end %>
+        <%= render "devise/shared/links" %>
       </div>
-      <%= render "devise/shared/links" %>
     </div>
   </div>
 </section>
