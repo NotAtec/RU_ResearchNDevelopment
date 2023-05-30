@@ -18,16 +18,19 @@ end
 class QuestionGenerator
     attr_accessor :client
     def generateQuestions(topic, amount)
-        generateSucces = false
         generateAttempts = 0
         succes = false
         while !succes
+            generateSucces = false
             while !generateSucces
                 questionText = generate(topic, amount)
-                #puts questionText
+                puts questionText
                 generateAttempts += 1
                 if (questionText != nil)
                     generateSucces = true
+                end
+                if generateAttempts>5
+                    return nil;
                 end
             end
             resultingQuestions = filter(questionText, amount)
@@ -238,6 +241,6 @@ questionGenerator = QuestionGenerator.new()
 #How to use it:
 # |
 # v
-#questionsResult = questionGenerator.generateQuestions("evolution", 3)
-#puts questionsResult
+questionsResult = questionGenerator.generateQuestions("evolution", 3)
+puts questionsResult
 #puts "script ended"
