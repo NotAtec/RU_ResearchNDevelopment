@@ -40,7 +40,7 @@ class QuestionGenerator
     #private
     def generate(topic, amount)
         OpenAI.configure do |config|
-            config.access_token = "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"
+            config.access_token = "key"
         end
         client = OpenAI::Client.new
         conversation = [{ role: "system", content: "You are a bot that makes " + amount.to_s + " multiple choice question about a given topic. Each multiple choice question has 4 possible answers. You always make sure that the right answer is provided at the bottom."},
