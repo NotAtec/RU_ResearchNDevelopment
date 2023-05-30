@@ -6,7 +6,6 @@ class Question
         @theQuestion = theQuestion
         @answers = answers
         @correctAnswer = correctAnswer
-        puts("question stored")
     end
     def getAnswer(index)
         @answers[index]
@@ -18,16 +17,30 @@ end
 
 class QuestionGenerator
     attr_accessor :client
-    def initializer
-        @key = "key"
-    end
     def generateQuestions(topic, amount)
+        generateSucces = false
+        generateAttempts = 0
         succes = false
+        while !succes
+            while !generateSucces
+                questionText = generate(topic, amount)
+                #puts questionText
+                generateAttempts += 1
+                if (questionText != nil)
+                    generateSucces = true
+                end
+            end
+            resultingQuestions = filter(questionText, amount)
+            if (resultingQuestions != nil) 
+                succes = true
+            end
+        end
+        return resultingQuestions
     end
     #private
     def generate(topic, amount)
         OpenAI.configure do |config|
-            config.access_token = "key"
+            config.access_token = "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"
         end
         client = OpenAI::Client.new
         conversation = [{ role: "system", content: "You are a bot that makes " + amount.to_s + " multiple choice question about a given topic. Each multiple choice question has 4 possible answers. You always make sure that the right answer is provided at the bottom."},
@@ -38,7 +51,7 @@ class QuestionGenerator
                 messages: conversation, # Required.
                 temperature: 0.7,
             })
-        puts response
+        #puts response
         return response.dig("choices", 0, "message", "content")
     end
     def filter(theString, amount)
@@ -48,10 +61,10 @@ class QuestionGenerator
         answerIndexes = findAns(theArray)
         storedQuestions = []
         if (optionIndexes.length == amount && questionIndexes.length == amount && answerIndexes.length == amount)
-            puts "answers grouped amount:#{amount}, questions:#{questionIndexes.length}, options:#{optionIndexes.length}, answers:#{answerIndexes.length}"
-            puts questionIndexes.to_s
-            puts optionIndexes.to_s
-            puts answerIndexes.to_s
+            #puts "answers grouped amount:#{amount}, questions:#{questionIndexes.length}, options:#{optionIndexes.length}, answers:#{answerIndexes.length}"
+            #puts questionIndexes.to_s
+            #puts optionIndexes.to_s
+            #puts answerIndexes.to_s
             (0...amount).each do |q|
                 questionPhrase = parseQues(theArray, q+1, questionIndexes[q], answerIndexes[q])
                 optionA = parseOpt(theArray, "a", optionIndexes[q])
@@ -60,15 +73,18 @@ class QuestionGenerator
                 optionD = parseOpt(theArray, "d", optionIndexes[q]+3)
                 options = [optionA, optionB, optionC, optionD]
                 answer = parseSingAns(theArray, answerIndexes[q])
+                if (optionA == nil || optionB == nil || optionC == nil || optionD == nil || questionPhrase == nil || answer==nil)
+                    return nil
+                end
                 fullQuestion = Question.new(questionPhrase, options, answer)
                 storedQuestions.append(fullQuestion)
             end
         elsif (optionIndexes.length == amount && questionIndexes.length == amount && answerIndexes.length == 1)
             answerList = parseMultAns(theArray, answerIndexes[0], amount)
-            puts "answers grouped amount:#{amount}, questions:#{questionIndexes.length}, options:#{optionIndexes.length}, answers:#{answerIndexes.length}"
-            puts questionIndexes.to_s
-            puts optionIndexes.to_s
-            puts answerList.to_s
+            #puts "answers grouped amount:#{amount}, questions:#{questionIndexes.length}, options:#{optionIndexes.length}, answers:#{answerIndexes.length}"
+            #puts questionIndexes.to_s
+            #puts optionIndexes.to_s
+            #puts answerList.to_s
             (0...amount).each do |q|
                 questionPhrase = parseQues(theArray, q+1, questionIndexes[q], answerIndexes[q])
                 optionA = parseOpt(theArray, "a", optionIndexes[q])
@@ -77,14 +93,18 @@ class QuestionGenerator
                 optionD = parseOpt(theArray, "d", optionIndexes[q]+3)
                 options = [optionA, optionB, optionC, optionD]
                 answer = answerList[q]
+                if (optionA == nil || optionB == nil || optionC == nil || optionD == nil || questionPhrase == nil || answer==nil)
+                    return nil
+                end
                 fullQuestion = Question.new(questionPhrase, options, answer)
                 storedQuestions.append(fullQuestion)
             end
         else 
-            puts "answers grouped amout:#{amount}, questions:#{questionIndexes.length}, options:#{optionIndexes.length}, answers:#{answerIndexes.length}"
-            puts questionIndexes.to_s
-            puts optionIndexes.to_s
-            puts answerIndexes.to_s
+            #puts "answers grouped amout:#{amount}, questions:#{questionIndexes.length}, options:#{optionIndexes.length}, answers:#{answerIndexes.length}"
+            #puts questionIndexes.to_s
+            #puts optionIndexes.to_s
+            #puts answerIndexes.to_s
+            return nil
         end
         return storedQuestions
     end
@@ -130,19 +150,19 @@ class QuestionGenerator
             if theArray[index].include? "?"
                 return theArray[index][(quesNum.to_s.length+2)..theArray[index].index("?")]
             else 
-                puts "question not defined in 1 single line. unaccounted for case"
-                return "failed"
+                #puts "question not defined in 1 single line. unaccounted for case"
+                return nil
             end
         elsif (theArray[index][0, 2+(quesNum.to_s.length)] == quesNum.to_s + ") ")
                 if theArray[index].include? "?"
                     return theArray[index][(quesNum.to_s.length+2)..theArray[index].index("?")]
                 else 
-                    puts "question not defined in 1 single line. unaccounted for case"
-                    return "failed"
+                    #puts "question not defined in 1 single line. unaccounted for case"
+                    return nil
                 end
         else 
-            puts "question did not start with \"Num. \" or \"Num) \", case unaccounted for"
-            return "failed"
+            #puts "question did not start with \"Num. \" or \"Num) \", case unaccounted for"
+            return nil
         end
     end
     def parseOpt(theArray, ansSymbol, index)
@@ -151,8 +171,8 @@ class QuestionGenerator
         elsif (theArray[index][0..2] == ansSymbol + ". " || theArray[index][0..2] == ansSymbol.upcase + ". " )
             return theArray[index][3...(theArray[index].length)]
         else
-            puts "option did not start with \"a) \" or \"a. \", case unaccounted for"
-            return "failed"
+            #puts "option did not start with \"a) \" or \"a. \", case unaccounted for"
+            return nil
         end
     end
     def parseSingAns(theArray, index)
@@ -162,8 +182,8 @@ class QuestionGenerator
             elsif "ABCD".include? theArray[index][8]
                 return "ABCD".index(theArray[index][8])
             else
-                puts "character not recognized: #{theArray[index][8]}"
-                return -1
+                #puts "character not recognized: #{theArray[index][8]}"
+                return nil
             end
         elsif ((theArray[index][0..7] == "answer: " || theArray[index][0..7] == "Answer: ") && theArray[index].length ==9)
             if "abcd".include? theArray[index][8]
@@ -171,12 +191,12 @@ class QuestionGenerator
             elsif "ABCD".include? theArray[index][8]
                 return "ABCD".index(theArray[index][8])
             else
-                puts "character not recognized: #{theArray[index][8]}"
-                return -1
+                #puts "character not recognized: #{theArray[index][8]}"
+                return nil
             end
         else 
-            puts "answer not formatted in format \"(a/A)nswer: a)\", \"(a/A)nswer: a.\""
-            return -1
+            #puts "answer not formatted in format \"(a/A)nswer: a)\", \"(a/A)nswer: a.\""
+            return nil
         end
     end
     def headerAndAnswers(theArray, index, amount) 
@@ -185,8 +205,8 @@ class QuestionGenerator
         end
         (0...amount).each do |a| 
             if !(theArray[index+1+a][0, (a+1).to_s.length] == (a+1).to_s && (theArray[index+1+a][(a+1).to_s.length..(a+1).to_s.length+1] == ". " || theArray[index+1+a][(a+1).to_s.length..(a+1).to_s.length+1] == ") "))
-                puts "(#{theArray[index+1+a][0, a.to_s.length]}) != (#{(a+1).to_s})"
-                puts "(#{theArray[index+1+a][a.to_s.length..a.to_s.length+1]}) != (. )"
+                #puts "(#{theArray[index+1+a][0, a.to_s.length]}) != (#{(a+1).to_s})"
+                #puts "(#{theArray[index+1+a][a.to_s.length..a.to_s.length+1]}) != (. )"
                 return false
             end
         end
@@ -201,12 +221,12 @@ class QuestionGenerator
                 elsif "ABCD".include? theArray[index+a+1][3]
                     answerNum.append("ABCD".index(theArray[index+a+1][3]))
                 else
-                    puts "character not recognized: #{theArray[index+a+1][3]}"
+                    #puts "character not recognized: #{theArray[index+a+1][3]}"
                     return nil
                 end
             end
         else
-            puts "format not recognized"
+            #puts "format not recognized"
             return nil
         end
         return answerNum
@@ -214,8 +234,10 @@ class QuestionGenerator
 end
 
 questionGenerator = QuestionGenerator.new()
-question = questionGenerator.generate("the owl house", 5)
-puts question
-questionList = questionGenerator.filter(question, 5)
-#puts questionList
-puts "script ended"
+
+#How to use it:
+# |
+# v
+#questionsResult = questionGenerator.generateQuestions("evolution", 3)
+#puts questionsResult
+#puts "script ended"
