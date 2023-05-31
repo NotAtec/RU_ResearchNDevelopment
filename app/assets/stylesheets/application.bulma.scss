@@ -103,6 +103,7 @@ body>footer {
   left: auto;
   right: 0;
 }
+
 #dd:hover {
   background-color: $highlight;
 }
@@ -124,4 +125,16 @@ body>footer {
 .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+
+// Colour Things
+.has-background-purple {
+  background-color: #C69DE9;
+}
+
+.is-purple {
+  color: #C69DE9;
+}
+
+.has-background-triviablue {
+  background-color: #29F0FD20;
 }
