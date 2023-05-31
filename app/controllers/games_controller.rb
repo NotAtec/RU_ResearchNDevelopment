@@ -12,6 +12,7 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
+    @friends = current_user.friends.map { |friend| [friend.username, friend.id] }
   end
 
   # GET /games/1/edit
@@ -20,6 +21,9 @@ class GamesController < ApplicationController
   # POST /games or /games.json
   def create
     @game = Game.new(game_params)
+    @game.current_question_id = Question.first.id # TODO: change this to a random question, given the topic, using GPT-3
+    @game.player1_id = current_user.id
+    @game.history << @game.current_question_id
 
     respond_to do |format|
       if @game.save
@@ -64,6 +68,6 @@ class GamesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def game_params
-    params.fetch(:game, {})
+    params.require(:game).permit(:player1_id, :player2_id, :topic)
   end
 end

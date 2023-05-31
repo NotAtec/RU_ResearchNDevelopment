@@ -1,9 +1,12 @@
-<h1>New game</h1>
-
-<%= render "form", game: @game %>
-
-<br>
-
-<div>
-  <%= link_to "Back to games", games_path %>
-</div>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-half">
+        <%= link_to root_path, class: "is-secondary is-size-7" do %>
+          <b>Back to Your Games</b>
+        <% end%>
+        <%= render "form", game: @game %>
+      </div>
+    </div>
+  </div>
+</section>
