@@ -67,16 +67,10 @@ class GamesController < ApplicationController
       return
     end
 
-    # Turbo stream to question result.
-
-    # In turbo stream, allow user to click on "next question" button, if both players have answered, otherwise go to homescreen.
-
     @game.answered(current_user.id, params[:choice])
     @game.next
 
-
-    # Turbostream Stuff
-    redirect_to game_url(@game), notice: 'Answer was successfully processed.'
+    redirect_to result_path(@game), notice: 'Answer was successfully processed.'
   end
 
   private

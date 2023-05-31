@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # with a turbo stream response.
 
   post "/games/:id", to: "games#process_choice", as: "process_choice"
+  get "games/:id/result", to: "games#result", as: "result"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

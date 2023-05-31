@@ -15,13 +15,21 @@ class Game < ApplicationRecord
       history << current_question_id
       self.player1_correct = 0
       self.player2_correct = 0
-
+      self.player1_recent = -1
+      self.player2_recent = -1
+      
       save
     end
   end
 
   def answered(id, choice)
     correct = Question.find(current_question_id).options.find_index(&:correct)
+    if player1_id == id
+      self.player1_recent = choice
+    else
+      self.player2_recent = choice
+    end
+
     if choice == correct.to_s
       if player1_id == id
         self.player1_correct = 1
