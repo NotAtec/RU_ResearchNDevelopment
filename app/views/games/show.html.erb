@@ -2,7 +2,14 @@
   <div class="container">
     <div class="columns is-centered is-vcentered">
       <div class="column is-two-thirds">
-        <h1 class="title">Question: <%= @question.text %></h1>
+        <div class="level">
+          <div class="level-left">
+            <h1 class="title">Question: <%= @question.text %></h1>
+          </div>
+          <div class="level-right">
+            <%= button_to "End The Game", game_path(@game), class: "button is-danger", method: :delete %>
+          </div>
+        </div>
         <div class="box has-background-triviablue">
           <div class="columns is-centered">
             <div class="column is-two-thirds is-centered">
@@ -10,7 +17,7 @@
               <h2 class="subtitle">Answers:</h2>
               <% @question.options.each_with_index do |o, idx| %>
                 <%= link_to game_path(@game, choice: idx), class: "box has-background-purple", data: { turbo_method: :post } do %>
-                    <p><b><%= (idx+65).chr %>)</b> <%= o.text %></p>
+                  <p><b><%= (idx+65).chr %>)</b> <%= o.text %></p>
                 <% end %>
               <% end %>
             </div>

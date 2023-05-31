@@ -53,11 +53,12 @@ class GamesController < ApplicationController
 
   # DELETE /games/1 or /games/1.json
   def destroy
+    @winner = @game.winner
     @game.destroy
     #TD: Notification 
 
     respond_to do |format|
-      format.html { redirect_to games_url, notice: 'Game was successfully deleted.' }
+      format.html { redirect_to games_url, notice: "The game has ended. #{@winner}" }
       format.json { head :no_content }
     end
   end

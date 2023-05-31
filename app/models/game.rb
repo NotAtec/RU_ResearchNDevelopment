@@ -62,4 +62,14 @@ class Game < ApplicationRecord
       player1_recent == -1 && player2_recent == -1 ? q.options[player2_backup.to_i] : q.options[player2_recent.to_i]
     end
   end
+
+  def winner
+    if player1_score > player2_score
+      "The winner is #{player1.username}"
+    elsif player1_score < player2_score
+      "The winner is #{player2.username}"
+    else
+      'The game ended in a tie'
+    end
+  end
 end
