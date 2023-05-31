@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_100905) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_31_114005) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,8 +29,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_100905) do
     t.datetime "updated_at", null: false
     t.bigint "player1_id"
     t.bigint "player2_id"
-    t.integer "player1_score"
-    t.integer "player2_score"
+    t.integer "player1_score", default: 0
+    t.integer "player2_score", default: 0
     t.boolean "player2_accepted", default: false
     t.integer "player1_correct", default: 0
     t.integer "player2_correct", default: 0
