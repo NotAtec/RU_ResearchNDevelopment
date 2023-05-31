@@ -5,9 +5,11 @@
     <p class="subtitle is-size-6"></p>
   </div>
   <footer class="card-footer">
-    <p class="card-footer-item">
-      <span><%= link_to "Play Game", game_path(game) %></span>
-    </p>
+    <% if game.player2_accepted %>
+      <%= button_to "Play Game", game_path(game), class: "card-footer-item button is-info", method: :get %>
+    <% else %>
+      <%= button_to "Accept Game", game_path(game), class: "card-footer-item button is-info", method: :patch%>
+    <% end %>
     <p class="card-footer-item">
       <span>Opponent: (#TD: Dynamically generate this)</span>
     </p>
