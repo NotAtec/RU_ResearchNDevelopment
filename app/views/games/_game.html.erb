@@ -1,2 +1,15 @@
-<div id="<%= dom_id game %>">
+<div id="<%= dom_id game %>" class="card">
+  <div class="card-content">
+    <p class="title"></p>
+    <p class="subtitle"></p>
+    <p class="subtitle is-size-6"></p>
+  </div>
+  <footer class="card-footer">
+    <p class="card-footer-item">
+      <span><%= link_to "Play Game", game_path(game) %></span>
+    </p>
+    <p class="card-footer-item">
+      <span>Opponent: (#TD: Dynamically generate this)</span>
+    </p>
+  </footer>
 </div>
