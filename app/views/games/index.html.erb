@@ -1,14 +1,23 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Games</h1>
-
-<div id="games">
-  <% @games.each do |game| %>
-    <%= render game %>
-    <p>
-      <%= link_to "Show this game", game %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New game", new_game_path %>
+<section class="section">
+  <div class="columns is-centered">
+    <div class="column is-four-fifths">
+      <h1 class="title">Ongoing Games</h1>
+      <div class="games">
+        <div class="grid-container">
+          <% @games.each do |game| %> <!-- TD: Make this dynamically get current games -->
+            <span><%= render game %></span>
+          <% end %>
+        </div>
+      </div>
+      <hr>
+      <h2 class="subtitle">Finished Games</h2>
+      <div class="games">
+        <div class="grid-container">
+          <% @games.each do |game| %> <!-- TD: Make this dynamically get past games -->
+            <span><%= render game %></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

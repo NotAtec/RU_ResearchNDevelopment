@@ -40,6 +40,7 @@
 
 $white-ish: #f5f5f5;
 
+// Global Layout Styles
 body {
   min-height: 100vh;
   display: flex;
@@ -52,6 +53,7 @@ body>footer {
   background-color: $white-ish;
 }
 
+// Flash Notification Styles
 .notification:not(:last-child) {
   margin-bottom: 0;
   animation: moveout 1s 1s ease forwards;
@@ -68,4 +70,24 @@ body>footer {
   to {
     top: -4rem;
   }
+}
+
+// Events Index page
+
+.grid-container {
+  margin: 0;
+  display: grid;
+  grid-template-rows: repeat(320px);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 8px;
+}
+
+.small-grid-container {
+  margin: 0;
+  display: grid;
+  grid-template-rows: repeat(320px);
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 8px;
 }
