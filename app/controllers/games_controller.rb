@@ -1,4 +1,5 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_game, only: %i[show edit update destroy process_choice result]
   before_action :verify_player, only: %i[show process_choice result]
 
