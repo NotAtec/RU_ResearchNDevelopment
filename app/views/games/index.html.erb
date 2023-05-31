@@ -4,16 +4,16 @@
       <h1 class="title">Ongoing Games <%= button_to "Create New Game", new_game_path, method: "get", class: "button is-primary", form: {style: 'display:inline-block;'} %></h1>
       <div class="games">
         <div class="grid-container">
-          <% @games.each do |game| %> <!-- TD: Make this dynamically get current games -->
+          <% @games.each do |game| %>
             <span><%= render game %></span>
           <% end %>
         </div>
       </div>
       <hr>
-      <h2 class="subtitle">Finished Games</h2>
+      <h2 class="subtitle">Game Invites</h2>
       <div class="games">
         <div class="grid-container">
-          <% @games.each do |game| %> <!-- TD: Make this dynamically get past games -->
+          <% @invites.each do |game| %>
             <span><%= render game %></span>
           <% end %>
         </div>

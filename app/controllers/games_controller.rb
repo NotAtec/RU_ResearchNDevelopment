@@ -3,7 +3,8 @@ class GamesController < ApplicationController
 
   # GET /games or /games.json
   def index
-    @games = Game.all
+    @games = Game.where(player1_id: current_user.id, player2_accepted: true) + Game.where(player2_id: current_user.id, player2_accepted: true)
+    @invites = Game.where(player2_id: current_user.id, player2_accepted: false)
   end
 
   # GET /games/1 or /games/1.json
