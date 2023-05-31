@@ -33,14 +33,23 @@
           <!-- TODO: Possibly add about page? -->
         </div>
         <div class="navbar-end">
-          <!-- TODO: Add login button, and whatever we need. -->
+          <% if user_signed_in? %>
+          <% else %>
+            <div class="navbar-item">
+              <p class="control"><%= link_to "Login", new_user_session_path, class: "has-text-black" %></p>
+            </div>
+            <div class="navbar-item">
+              <p class="control"><%= link_to "Sign Up", new_user_registration_path, class: "has-text-black" %></p>
+            </div>
+          <% end %>
         </div>
       </div>
     </nav>
     <%= yield %>
     <footer>
       <div class="content has-text-centered">
-        <p><strong>TrivAI</strong>, created by Jeroen Brinkhorst, Jeske Groenheiden, Floris Reuvers and Leonne Snel. <br> Code is available on <a href="https://github.com/NotAtec/RU_ResearchNDevelopment">GitHub</a></p>
+        <p><strong>TrivAI</strong>, created by Jeroen Brinkhorst, Jeske Groenheiden, Floris Reuvers and Leonne Snel. <br>
+           Code is available on <a href="https://github.com/NotAtec/RU_ResearchNDevelopment">GitHub</a></p>
       </div>
     </footer>
   </body>
