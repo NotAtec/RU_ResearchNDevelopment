@@ -36,4 +36,12 @@ class Game < ApplicationRecord
 
     save
   end
+  
+  def answered_by(id)
+    if player1_id == id
+      player1_correct != 0
+    else
+      player2_correct != 0
+    end
+  end
 end

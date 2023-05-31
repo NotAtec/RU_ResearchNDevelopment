@@ -62,9 +62,11 @@ class GamesController < ApplicationController
   end
 
   def process_choice
-    # Check if choice is correct
-    # if it is correct, set playerX_correct to 1; else -1.
-    # If both players have answered (aka playerX_correct != 0), then update the score and move to the next question. \\
+    if @game.answered_by(current_user.id)
+      redirect_to game_url(@game), alert: 'You have already answered this question.'
+      return
+    end
+
     # Turbo stream to question result.
 
     # In turbo stream, allow user to click on "next question" button, if both players have answered, otherwise go to homescreen.
