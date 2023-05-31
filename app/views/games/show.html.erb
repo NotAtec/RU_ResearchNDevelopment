@@ -6,19 +6,13 @@
         <div class="box has-background-triviablue">
           <div class="columns is-centered">
             <div class="column is-two-thirds is-centered">
+              <!-- Todo: Add text saying player will only get 1 point for a correct answer, if already answered. -->
               <h2 class="subtitle">Answers:</h2>
-              <div class="box has-background-purple">
-                <p><b>A)</b> Option A</p>
-              </div>
-              <div class="box has-background-purple">
-                <p><b>A)</b> Option B</p>
-              </div>
-              <div class="box has-background-purple">
-                <p><b>A)</b> Option C</p>
-              </div>
-              <div class="box has-background-purple">
-                <p><b>A)</b> You get the point</p>
-              </div>
+              <% @question.options.each_with_index do |o, idx| %>
+                <%= link_to game_path(@game, choice: idx), class: "box has-background-purple", data: { turbo_method: :post } do %>
+                    <p><b><%= (idx+65).chr %>)</b> <%= o.text %></p>
+                <% end %>
+              <% end %>
             </div>
           </div>
         </div>

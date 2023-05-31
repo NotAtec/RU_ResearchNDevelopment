@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[show edit update destroy]
-  before_action :verify_player, only: %i[show]
+  before_action :set_game, only: %i[show edit update destroy process_choice]
+  before_action :verify_player, only: %i[show process_choice]
 
   # GET /games or /games.json
   def index
@@ -59,6 +59,22 @@ class GamesController < ApplicationController
       format.html { redirect_to games_url, notice: 'Game was successfully deleted.' }
       format.json { head :no_content }
     end
+  end
+
+  def process_choice
+    # Check if choice is correct
+    # if it is correct, set playerX_correct to 1; else -1.
+    # If both players have answered (aka playerX_correct != 0), then update the score and move to the next question. \\
+    # Turbo stream to question result.
+
+    # In turbo stream, allow user to click on "next question" button, if both players have answered, otherwise go to homescreen.
+
+    @game.answered(current_user.id, params[:choice])
+    @game.next
+
+
+    # Turbostream Stuff
+    redirect_to game_url(@game), notice: 'Answer was successfully processed.'
   end
 
   private
