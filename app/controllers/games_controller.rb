@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[show edit update destroy]
+  before_action :verify_player, only: %i[show]
 
   # GET /games or /games.json
   def index
@@ -68,5 +69,10 @@ class GamesController < ApplicationController
   # Only allow a list of trusted parameters through.
   def game_params
     params.require(:game).permit(:player1_id, :player2_id, :topic)
+  end
+
+  def verify_player
+    redirect_to games_url, alert: 'You are not a player of this game.' unless @game.player1_id == current_user.id || @game.player2_id == current_user.id
+    redirect_to games_url, alert: 'This game has not been accepted yet.' unless @game.player2_accepted
   end
 end
