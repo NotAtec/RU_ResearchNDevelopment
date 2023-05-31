@@ -11,4 +11,14 @@ class ApplicationController < ActionController::Base
 
     devise_parameter_sanitizer.permit(:account_update, keys: [:username])
   end
+
+  private
+
+  def authenticate_user!
+    if user_signed_in?
+      super
+    else
+      redirect_to welcome_path, notice: "Please Login or Sign Up to Play the Game!"
+    end
+  end
 end

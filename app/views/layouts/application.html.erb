@@ -37,6 +37,24 @@
         </div>
         <div class="navbar-end">
           <% if user_signed_in? %>
+            <div class="navbar-item" id="dd">
+              <div class="dropdown">
+                <span><%= current_user.username %>&nbsp;</span>
+                <span class="icon is-small">
+                  <i class="arrow down"></i>
+                </span>
+                <div class="dropdown-menu is-right" id="dropdown-menu" role="menu">
+                  <div class="dropdown-content">
+                    <%= link_to edit_user_registration_path do %>
+                      <p class="dropdown-item">Account Settings</p>
+                    <% end %>
+                    <%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+                      <p class="dropdown-item">Sign Out</p>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
           <% else %>
             <div class="navbar-item">
               <p class="control"><%= link_to "Login", new_user_session_path, class: "has-text-black" %></p>
@@ -52,7 +70,7 @@
     <footer>
       <div class="content has-text-centered">
         <p><strong>TrivAI</strong>, created by Jeroen Brinkhorst, Jeske Groenheiden, Floris Reuvers and Leonne Snel. <br>
-           Code is available on <a href="https://github.com/NotAtec/RU_ResearchNDevelopment">GitHub</a></p>
+          Code is available on <a href="https://github.com/NotAtec/RU_ResearchNDevelopment">GitHub</a></p>
       </div>
     </footer>
   </body>

@@ -39,6 +39,7 @@
 @import 'bulma/bulma';
 
 $white-ish: #f5f5f5;
+$highlight: #ddd;
 
 // Global Layout Styles
 body {
@@ -92,6 +93,40 @@ body>footer {
   row-gap: 8px;
 }
 
+.mgt-n10 {
+  margin-top: -10px;
+}
+
+// Header Dropdown
+
+#dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+#dd:hover {
+  background-color: $highlight;
+}
+.dropdown:hover .dropdown-menu {display: block;}
+.dropdown-content p:hover {background-color: #ddd;}
+.dropdown-trigger > button { border: 0; }
+
+#dropdown-div {
+  padding: 16px 7px;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+
+// Colour Things
 .has-background-purple {
   background-color: #C69DE9;
 }
