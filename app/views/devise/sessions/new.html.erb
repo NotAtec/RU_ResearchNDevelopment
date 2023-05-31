@@ -1,0 +1,53 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-one-third">
+        <h1 class="title">Log in</h1>
+        <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          <div class="field">
+            <div class="control">
+              <%= f.input :email, 
+                  required: false, 
+                  autofocus: true, 
+                  wrapper: false, 
+                  label: "Email:", 
+                  input_html: { class: "input", autocomplete: "email" },
+                  label_html: { class: "label" }%>
+            </div>
+          </div>
+          <div class="field">
+            <div class="control">
+              <%= f.input :password, 
+                  required: false, 
+                  wrapper: false, 
+                  label: "Password:", 
+                  input_html: { class: "input", autocomplete: "current-password" },
+                  label_html: { class: "label" }%>
+            </div>
+          </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <div class="control">
+                <%= f.input :remember_me, 
+                    required: false, 
+                    wrapper: false, 
+                    inline_label: "Remember me", 
+                    as: :boolean,
+                    input_html: { class: "checkbox" },
+                    label_html: { class: "checkbox" }%>
+              </div>
+            </div>
+          <% end %>
+          <br>
+          <div class="field">
+            <div class="control">
+              <%= f.button :submit, "Log in", class: "button is-primary" %>
+            </div>
+          </div>
+        <% end %>
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
+  </div>
+</section>

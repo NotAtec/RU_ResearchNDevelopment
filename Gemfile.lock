@@ -68,12 +68,11 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
+    bcrypt (3.1.18)
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bulma-rails (0.9.4)
-      sassc (~> 2.0)
     capybara (3.39.0)
       addressable
       matrix
@@ -91,8 +90,13 @@ GEM
     debug (1.7.2)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    devise (4.9.2)
+      bcrypt (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 4.1.0)
+      responders
+      warden (~> 1.2.3)
     erubi (1.12.0)
-    ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.12.0)
@@ -131,6 +135,7 @@ GEM
     nio4r (2.5.9)
     nokogiri (1.14.3-x86_64-linux)
       racc (~> 1.4)
+    orm_adapter (0.5.0)
     pg (1.4.5)
     public_suffix (5.0.1)
     puma (5.6.5)
@@ -169,14 +174,18 @@ GEM
     regexp_parser (2.8.0)
     reline (0.3.3)
       io-console (~> 0.5)
+    responders (3.1.0)
+      actionpack (>= 5.2)
+      railties (>= 5.2)
     rexml (3.2.5)
     rubyzip (2.3.2)
-    sassc (2.4.0)
-      ffi (~> 1.9)
     selenium-webdriver (4.8.6)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    simple_form (5.2.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -194,6 +203,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    warden (1.2.9)
+      rack (>= 2.0.9)
     web-console (4.2.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -216,16 +227,17 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap
-  bulma-rails
   capybara
   cssbundling-rails
   debug
+  devise (~> 4.9)
   jbuilder
   jsbundling-rails
   pg
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.2)
   selenium-webdriver
+  simple_form (~> 5.2)
   sprockets-rails
   stimulus-rails
   turbo-rails
