@@ -1,0 +1,46 @@
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered is-vcentered">
+      <div class="column is-two-thirds">
+        <h1 class="title">Question: <%= @question.text %></h1>
+        <div class="box has-background-triviablue">
+          <div class="columns is-centered">
+            <div class="column is-two-thirds is-centered">
+              <!-- Todo: Add text saying player will only get 1 point for a correct answer, if already answered. -->
+              <h2 class="subtitle">You Answered:</h2>
+              <div class="box has-background-purple">
+                <p><%= @choice.text %></p>
+              </div>
+              <h2 class="subtitle is-6">The correct answer was:</h2>
+              <div class="box has-background-purple">
+                <p><%= @correct.text %></p>
+              </div>
+              <% if @choice == @correct %>
+                <p class="is-4"><b>Congratulations! That's +1 Point</b></p>
+              <% else %>
+                <p class="is-4"><b>Sorry, that's incorrect.</b></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="box">
+          <div class="columns is-centered">
+            <div class="column is-two-thirds is-centered">
+              <% if @game.player1_correct == 0 && @game.player2_correct = 0 %>
+                Both players have answered. Continue to the next round?
+                <%= button_to game_path(@game), class: "button has-background-purple", method: :get do %>
+                  <p><b>Next Round</b></p>
+                <% end %>
+              <% else %>
+                Wait for your opponent to answer. For now you can go back to your games.
+                <%= button_to games_path, class: "button has-background-purple", method: :get do %>
+                  <p><b>Back to your Games</b></p>
+                <% end %>
+              <% end%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[show edit update destroy process_choice]
-  before_action :verify_player, only: %i[show process_choice]
+  before_action :set_game, only: %i[show edit update destroy process_choice result]
+  before_action :verify_player, only: %i[show process_choice result]
 
   # GET /games or /games.json
   def index
@@ -30,7 +30,7 @@ class GamesController < ApplicationController
     respond_to do |format|
       if @game.save
         #TD: Notification
-        format.html { redirect_to game_url(@game), notice: 'Game was successfully created.' }
+        format.html { redirect_to games_url, notice: 'Game was successfully created. Wait for your opponent to accept it before playing.' }
         format.json { render :show, status: :created, location: @game }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -72,6 +72,13 @@ class GamesController < ApplicationController
 
     redirect_to result_path(@game), notice: 'Answer was successfully processed.'
   end
+
+  def result
+    @question = Question.find(@game.current_question_id)
+    @correct = @question.options.find(&:correct)
+
+    @choice = @game.chosen_by(current_user.id, @question)
+  end 
 
   private
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_191131) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_31_215713) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_191131) do
     t.string "topic"
     t.integer "player1_recent", default: -1
     t.integer "player2_recent", default: -1
+    t.integer "player1_backup", default: -1
+    t.integer "player2_backup", default: -1
     t.index ["current_question_id"], name: "index_games_on_current_question_id"
     t.index ["player1_id"], name: "index_games_on_player1_id"
     t.index ["player2_id"], name: "index_games_on_player2_id"

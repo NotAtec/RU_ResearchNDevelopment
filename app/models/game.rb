@@ -15,6 +15,8 @@ class Game < ApplicationRecord
       history << current_question_id
       self.player1_correct = 0
       self.player2_correct = 0
+      self.player1_backup = player1_recent
+      self.player2_backup = player2_recent
       self.player1_recent = -1
       self.player2_recent = -1
       
@@ -44,12 +46,20 @@ class Game < ApplicationRecord
 
     save
   end
-  
+
   def answered_by(id)
     if player1_id == id
       player1_correct != 0
     else
       player2_correct != 0
+    end
+  end
+
+  def chosen_by(id, q)
+    if id == player1
+      player1_recent == -1 && player2_recent == -1 ? q.options[player1_backup.to_i] : q.options[player1_recent.to_i]
+    else
+      player1_recent == -1 && player2_recent == -1 ? q.options[player2_backup.to_i] : q.options[player2_recent.to_i]
     end
   end
 end
