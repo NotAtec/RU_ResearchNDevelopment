@@ -9,7 +9,9 @@ class GamesController < ApplicationController
   end
 
   # GET /games/1 or /games/1.json
-  def show; end
+  def show
+    @question = Question.find(@game.current_question_id)
+  end
 
   # GET /games/new
   def new
