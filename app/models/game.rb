@@ -56,7 +56,7 @@ class Game < ApplicationRecord
   end
 
   def chosen_by(id, q)
-    if id == player1
+    if id == player1_id
       player1_recent == -1 && player2_recent == -1 ? q.options[player1_backup.to_i] : q.options[player1_recent.to_i]
     else
       player1_recent == -1 && player2_recent == -1 ? q.options[player2_backup.to_i] : q.options[player2_recent.to_i]
