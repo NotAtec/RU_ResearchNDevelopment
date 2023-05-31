@@ -26,6 +26,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
+        #TD: Notification
         format.html { redirect_to game_url(@game), notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
@@ -38,6 +39,7 @@ class GamesController < ApplicationController
   # PATCH/PUT /games/1 or /games/1.json
   def update
     if Game.update(params[:id], player2_accepted: true)
+      #TD: Notification
       # TD: Make this the game-url
       redirect_to games_url, notice: 'Game was successfully accepted.'
     else
@@ -48,9 +50,10 @@ class GamesController < ApplicationController
   # DELETE /games/1 or /games/1.json
   def destroy
     @game.destroy
+    #TD: Notification 
 
     respond_to do |format|
-      format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
+      format.html { redirect_to games_url, notice: 'Game was successfully deleted.' }
       format.json { head :no_content }
     end
   end

@@ -1,17 +1,19 @@
 <div id="<%= dom_id game %>" class="card">
   <div class="card-content">
-    <p class="title"></p>
-    <p class="subtitle"></p>
-    <p class="subtitle is-size-6"></p>
+    <p class="title"><%=game.player1.username%> vs <%=game.player2.username%> </p>
+    <p class="subtitle">Topic: <%= game.topic %></p>
+    <p class="subtitle is-size-6">Score: <%= game.player1_score %> - <%= game.player2_score %></p>
   </div>
-  <footer class="card-footer">
+  <footer class="card-footer container">
+    
     <% if game.player2_accepted %>
-      <%= button_to "Play Game", game_path(game), class: "card-footer-item button is-info", method: :get %>
+      <span class="card-footer-item"> </span>
+      <%= button_to "Play Game", game_path(game), class: "card-footer-item button is-info is-centered", method: :get %>
+      <span class="card-footer-item"> </span>
     <% else %>
       <%= button_to "Accept Game", game_path(game), class: "card-footer-item button is-info", method: :patch%>
+      <span class="card-footer-item"> </span>
+      <%= button_to "Deny Game", game_path(game), class: "card-footer-item button is-danger", method: :delete %>
     <% end %>
-    <p class="card-footer-item">
-      <span>Opponent: (#TD: Dynamically generate this)</span>
-    </p>
   </footer>
 </div>
