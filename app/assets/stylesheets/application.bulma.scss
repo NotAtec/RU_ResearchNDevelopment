@@ -37,3 +37,104 @@
 // @import "bulma/sass/layout/section.sass";
 
 @import 'bulma/bulma';
+
+$white-ish: #f5f5f5;
+$highlight: #ddd;
+
+// Global Layout Styles
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body>footer {
+  margin-top: auto;
+  padding: 1.5rem;
+  background-color: $white-ish;
+}
+
+// Flash Notification Styles
+.notification:not(:last-child) {
+  margin-bottom: 0;
+  animation: moveout 1s 1s ease forwards;
+  position: absolute;
+  width: 100vw;
+  z-index: 31;
+}
+
+@keyframes moveout {
+  from {
+    top: 0px;
+  }
+
+  to {
+    top: -4rem;
+  }
+}
+
+// Events Index page
+
+.grid-container {
+  margin: 0;
+  display: grid;
+  grid-template-rows: repeat(320px);
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 8px;
+}
+
+.small-grid-container {
+  margin: 0;
+  display: grid;
+  grid-template-rows: repeat(320px);
+  grid-template-columns: 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 8px;
+}
+
+.mgt-n10 {
+  margin-top: -10px;
+}
+
+// Header Dropdown
+
+#dropdown-menu {
+  left: auto;
+  right: 0;
+}
+
+#dd:hover {
+  background-color: $highlight;
+}
+.dropdown:hover .dropdown-menu {display: block;}
+.dropdown-content p:hover {background-color: #ddd;}
+.dropdown-trigger > button { border: 0; }
+
+#dropdown-div {
+  padding: 16px 7px;
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+
+// Colour Things
+.has-background-purple {
+  background-color: #C69DE9;
+}
+
+.is-purple {
+  color: #C69DE9;
+}
+
+.has-background-triviablue {
+  background-color: #29F0FD20;
+}

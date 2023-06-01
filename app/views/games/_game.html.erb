@@ -1,2 +1,31 @@
-<div id="<%= dom_id game %>">
+<div id="<%= dom_id game %>" class="card">
+  <div class="card-content">
+    <p class="title"><%=game.player1.username%> vs <%=game.player2.username%> </p>
+    <p class="subtitle">Topic: <%= game.topic %></p>
+    <% if game.player1_id = current_user.id %>
+      <% if game.player1_correct != 0 %>
+        <br>
+      <% else %>
+        <p class="mgt-n10">You Can Answer!</p>
+      <% end %>
+    <% elsif game.player2_correct != 0 %>
+      <br>
+    <% else %>
+      <p class="mgt-n10">You Can Answer!</p>
+    <% end %>
+    <br>
+    <p class="subtitle is-size-6">Score: <%= game.player1_score %> - <%= game.player2_score %></p>
+    <!-- TD: Add element saying if it's answerable -->
+  </div>
+  <footer class="card-footer container">
+    <% if game.player2_accepted %>
+      <span class="card-footer-item"> </span>
+      <%= button_to "Play Game", game_path(game), class: "card-footer-item button is-info is-centered", method: :get %>
+      <span class="card-footer-item"> </span>
+    <% else %>
+      <%= button_to "Accept Game", game_path(game), class: "card-footer-item button is-info", method: :patch%>
+      <span class="card-footer-item"> </span>
+      <%= button_to "Deny Game", game_path(game), class: "card-footer-item button is-danger", method: :delete %>
+    <% end %>
+  </footer>
 </div>

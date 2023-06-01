@@ -1,10 +1,29 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @game %>
-
-<div>
-  <%= link_to "Edit this game", edit_game_path(@game) %> |
-  <%= link_to "Back to games", games_path %>
-
-  <%= button_to "Destroy this game", @game, method: :delete %>
-</div>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered is-vcentered">
+      <div class="column is-two-thirds">
+        <div class="level">
+          <div class="level-left">
+            <h1 class="title">Question: <%= @question.text %></h1>
+          </div>
+          <div class="level-right">
+            <%= button_to "End The Game", game_path(@game), class: "button is-danger", method: :delete %>
+          </div>
+        </div>
+        <div class="box has-background-triviablue">
+          <div class="columns is-centered">
+            <div class="column is-two-thirds is-centered">
+              <!-- Todo: Add text saying player will only get 1 point for a correct answer, if already answered. -->
+              <h2 class="subtitle">Answers:</h2>
+              <% @question.options.each_with_index do |o, idx| %>
+                <%= link_to game_path(@game, choice: idx), class: "box has-background-purple", data: { turbo_method: :post } do %>
+                  <p><b><%= (idx+65).chr %>)</b> <%= o.text %></p>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
