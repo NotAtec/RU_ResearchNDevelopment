@@ -64,12 +64,16 @@ class Game < ApplicationRecord
   end
 
   def winner
-    if player1_score > player2_score
-      "The winner is #{player1.username}"
-    elsif player1_score < player2_score
-      "The winner is #{player2.username}"
+    if player2_accepted
+      if player1_score > player2_score
+        "The winner is #{player1.username}"
+      elsif player1_score < player2_score
+        "The winner is #{player2.username}"
+      else
+        'The game ended in a tie'
+      end
     else
-      'The game ended in a tie'
+      ''
     end
   end
 end
