@@ -26,7 +26,7 @@
         <div class="box">
           <div class="columns is-centered">
             <div class="column is-two-thirds is-centered">
-              <% if @game.player1_correct == 0 && @game.player2_correct = 0 %>
+              <% if @game.player1_correct == 0 && @game.player2_correct == 0 %>
                 Both players have answered. Continue to the next round?
                 <%= button_to game_path(@game), class: "button has-background-purple", method: :get do %>
                   <p><b>Next Round</b></p>
