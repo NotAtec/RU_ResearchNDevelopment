@@ -1,0 +1,18 @@
+<%= simple_form_for :search do |f| %>
+  <div class="form">
+    <div class="control">
+      <%= f.input :name,
+                  wrapper: false,
+                  required: false,  
+                  label: false,
+                  input_html: { class: "input" },
+                  label_html: { class: "label" } %>
+    </div>
+  </div>
+
+  <div class="form">
+    <div class="control">
+      <%= f.submit "Add Friend", class: "button is-primary" %>
+    </div>
+  </div>
+<% end %>
