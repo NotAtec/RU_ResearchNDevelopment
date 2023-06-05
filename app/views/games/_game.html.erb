@@ -20,10 +20,10 @@
   <footer class="card-footer container">
     <% if game.player2_accepted %>
       <span class="card-footer-item"> </span>
-      <%= button_to "Play Game", game_path(game), class: "card-footer-item button is-info is-centered", method: :get %>
+      <%= button_to "Play Game", game_path(game), class: "card-footer-item button has-background-purple is-centered", method: :get %>
       <span class="card-footer-item"> </span>
     <% else %>
-      <%= button_to "Accept Game", game_path(game), class: "card-footer-item button is-info", method: :patch%>
+      <%= button_to "Accept Game", game_path(game), class: "card-footer-item button is-success", method: :patch%>
       <span class="card-footer-item"> </span>
       <%= button_to "Deny Game", game_path(game), class: "card-footer-item button is-danger", method: :delete %>
     <% end %>
