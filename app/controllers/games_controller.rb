@@ -17,7 +17,7 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
-    @friends = current_user.friends.map { |friend| [friend.username, friend.id] }
+    @friends = current_user.friends.map { |friend| [friend.correct_name(current_user.id), friend.id] }
   end
 
 
