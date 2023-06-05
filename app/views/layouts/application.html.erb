@@ -37,6 +37,9 @@
         </div>
         <div class="navbar-end">
           <% if user_signed_in? %>
+            <div class="navbar-item">
+              <p class="control"><%= link_to "Friends", friends_path, class: "is-purple has-text-weight-bold" %></p>
+            </div>
             <div class="navbar-item" id="dd">
               <div class="dropdown">
                 <span><%= current_user.username %>&nbsp;</span>
