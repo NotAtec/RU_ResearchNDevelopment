@@ -17,4 +17,14 @@ class FriendRequestsController < ApplicationController
       redirect_to friends_path, notice: 'Something went wrong, try again.'
     end
   end
+
+  # PATCH /friends/:id
+  def update
+    @request = FriendRequest.find(params[:id])
+    if @request.confirm(current_user.id)
+      redirect_to friends_path, notice: 'Completed Sucessfully.'
+    else
+      redirect_to friends_path, notice: 'Something went wrong, try again.'
+    end
+  end
 end

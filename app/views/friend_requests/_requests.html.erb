@@ -14,8 +14,8 @@
           </div>
         </div>
         <footer class="card-footer">
-          <%= button_to "Accept Request", root_path, class: "button is-primary has-text-weight-semibold" %>
-          <%= button_to "Decline Request", root_path, class: "button is-danger has-text-weight-semibold" %>
+          <%= button_to "Accept Request", friend_path(r), method: :patch, class: "button is-primary has-text-weight-semibold" %>
+          <%= button_to "Decline Request", friends_path(r), method: :delete, class: "button is-danger has-text-weight-semibold" %>
         </footer>
       </div>
     </div>
@@ -38,7 +38,7 @@
           </div>
         </div>
         <footer class="card-footer">
-          <%= button_to "Cancel Request", root_path, class: "button is-danger has-text-weight-semibold" %>
+          <%= button_to "Cancel Request", friends_path(r), method: :delete, class: "button is-danger has-text-weight-semibold" %>
         </footer>
       </div>
     </div>
