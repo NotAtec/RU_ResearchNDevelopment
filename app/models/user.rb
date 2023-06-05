@@ -12,7 +12,7 @@ class User < ApplicationRecord
   has_many :game2, class_name: 'Game', foreign_key: 'player2_id', dependent: :destroy
 
   def friends
-    requests.where(confirmed: true).map(&:requestee) + received_requests.where(confirmed: true).map(&:requester)
+    requests.where(confirmed: true) + received_requests.where(confirmed: true)
   end
 
   def incoming_requests

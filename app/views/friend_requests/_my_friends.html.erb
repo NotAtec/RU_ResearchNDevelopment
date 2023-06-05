@@ -10,11 +10,11 @@
               </figure>
             </div>
             <div class="media-content">
-              <p class="title is-4"><%= u.username %></p>
+              <p class="title is-4"><%= u.correct_name(current_user.id) %></p>
             </div>
           </div>
           <footer class="card-footer">
-            <%= button_to "Remove Friend", root_path, class: "button has-background-purple has-text-weight-semibold" %>
+            <%= button_to "Remove Friend", friend_path(u), method: :delete, class: "button has-background-purple has-text-weight-semibold" %>
           </footer>
         </div>
       </div>
