@@ -17,9 +17,9 @@ class GamesController < ApplicationController
   # GET /games/new
   def new
     @game = Game.new
-    @friends = current_user.friends.map { |friend| friend.cor_map(current_user.id) }
+    fr = current_user.friends.map { |f| f.requester_id == current_user.id ? f.requestee : f.requester}
+    @friends = fr.map { |f| [f.username, f.id] }
   end
-
 
   # POST /games or /games.json
   def create
