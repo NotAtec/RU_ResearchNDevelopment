@@ -1,0 +1,22 @@
+<section class="section">
+  <div class="columns is-centered">
+    <div class="column is-two-thirds">
+      <h1 class="title">Friends</h1>
+      <% if @friends.empty? %>
+        <p>You have no friends yet... Maybe add someone using the searchbar below!</p>
+      <% else %>
+        <%= render 'my_friends' %>
+      <% end %>
+      <br>
+      <h2 class="subtitle">Friend Requests</h2>
+      <% if @incoming.empty? && @outgoing.empty? %>
+        <p>You have no incoming or outgoing requests.</p>
+      <% else %>
+        <%= render 'requests' %>
+      <% end %>
+      <br>
+      <h2 class="subtitle">Add new Friend</h2>
+      <%= render 'search_friends' %>
+    </div>
+  </div>
+</section>

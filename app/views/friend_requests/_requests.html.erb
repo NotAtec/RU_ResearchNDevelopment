@@ -1,0 +1,48 @@
+<p>Incoming:</p>
+<div class="friends-grid">
+  <% @incoming.each do |r| %>
+    <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <!-- add procedural grabber when gravatar -->
+              <img src="https://static.thenounproject.com/png/574704-200.png" alt="Placeholder Avatar">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4"><%= r.requester.username %></p>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <%= button_to "Accept Request", friend_path(r), method: :patch, class: "button is-primary has-text-weight-semibold" %>
+          <%= button_to "Decline Request", friend_path(r), method: :delete, class: "button is-danger has-text-weight-semibold" %>
+        </footer>
+      </div>
+    </div>
+  <% end %>
+</div>
+<hr>
+<p>Outgoing:</p>
+<div class="friends-grid">
+  <% @outgoing.each do |r| %>
+    <div class="card">
+      <div class="card-content">
+        <div class="media">
+          <div class="media-left">
+            <figure class="image is-48x48">
+              <!-- add procedural grabber when gravatar -->
+              <img src="https://static.thenounproject.com/png/574704-200.png" alt="Placeholder Avatar">
+            </figure>
+          </div>
+          <div class="media-content">
+            <p class="title is-4"><%= r.requestee.username %></p>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <%= button_to "Cancel Request", friend_path(r), method: :delete, class: "button is-danger has-text-weight-semibold" %>
+        </footer>
+      </div>
+    </div>
+  <% end %>
+</div>

@@ -125,6 +125,7 @@ body>footer {
 .down {
   transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
+}
 
 // Colour Things
 .has-background-purple {
@@ -137,4 +138,12 @@ body>footer {
 
 .has-background-triviablue {
   background-color: #29F0FD20;
+}
+
+// Friendlist
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(100px, auto);
 }

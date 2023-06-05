@@ -6,4 +6,17 @@ class FriendRequest < ApplicationRecord
   def confirm(user_id)
     update(confirmed: true) if requestee_id == user_id
   end
+
+  def correct_name(user_id)
+    requester_id == user_id ? requestee.username : requester.username
+  end
+
+  def cor_map(user_id)
+    map = []
+    u = requester_id == user_id ? requestee.username : requester.username
+    map << u
+    map << requester_id == user_id ? requestee.id : requester.id
+    map
+    
+  end
 end
