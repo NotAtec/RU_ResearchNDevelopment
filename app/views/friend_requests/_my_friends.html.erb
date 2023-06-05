@@ -1,0 +1,22 @@
+<div class="friends-grid">
+  <% @friends.each do |u| %>
+    <div class="card">
+        <div class="card-content">
+          <div class="media">
+            <div class="media-left">
+              <figure class="image is-48x48">
+                <!-- add procedural grabber when gravatar -->
+                <img src="https://static.thenounproject.com/png/574704-200.png" alt="Placeholder Avatar">
+              </figure>
+            </div>
+            <div class="media-content">
+              <p class="title is-4"><%= u.correct_name(current_user.id) %></p>
+            </div>
+          </div>
+          <footer class="card-footer">
+            <%= button_to "Remove Friend", friend_path(u), method: :delete, class: "button has-background-purple has-text-weight-semibold" %>
+          </footer>
+        </div>
+      </div>
+  <% end %>
+</div>
