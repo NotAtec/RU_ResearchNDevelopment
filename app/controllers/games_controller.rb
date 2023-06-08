@@ -24,7 +24,7 @@ class GamesController < ApplicationController
   # POST /games or /games.json
   def create
     @game = Game.new(game_params)
-    @game.current_question_id = 1 # TODO: change this to a random question, given the topic, using GPT-3
+    @game.current_question_id = Question.first.id # TODO: change this to a random question, given the topic, using GPT-3
     @game.player1_id = current_user.id
     @game.history << @game.current_question_id
 

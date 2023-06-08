@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+# Create example Question.
+q = Question.create(text: "Is this an example question?")
+Option.create(text: "yes", correct: true, question_id: q.id)
+Option.create(text: "no", question_id: q.id)
