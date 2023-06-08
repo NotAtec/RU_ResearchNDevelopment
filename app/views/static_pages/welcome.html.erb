@@ -1,1 +1,80 @@
-Welcome Page Will Go Here
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TrivAI - A GPT based Trivia Game</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+  <body>
+    <% if flash[:notice] %>
+      <div class="notification is-primary global-notification">
+        <p class="notice"><%= notice %></p>
+      </div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="notification is-danger global-notification">
+        <p class="alert"><%= alert %></p>
+      </div>
+    <% end %>
+    <section class="hero has-background-light is-fullheight">
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <%= link_to root_path do %>
+                <%= image_tag('LogoRD.png', width: "30%") %>
+              <% end %>
+              <span class="navbar-burger burger" data-target="navbarMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+              <div class="navbar-end">
+                <div class="navbar-item">
+                  <p class="control"><%= link_to "Login", new_user_session_path, class: "has-text-black" %></p>
+                </div>
+                <div class="navbar-item">
+                  <p class="control"><%= link_to "Sign Up", new_user_registration_path, class: "has-text-black" %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <div class="column is-6 is-offset-3">
+            <h1 class="title">
+              Welcome to TrivAI
+            </h1>
+            <h2 class="subtitle">
+              TrivAI is the newest Trivia game available. (See what we did there?) But seriously, TrivAI is a trivia game that uses the latest in AI technology to generate questions for you to answer. 
+              <br>
+              <br>
+              <strong>Sign up now to start playing!</strong>
+            </h2>
+            <div class="box has-background-triviablue">
+              <div class="field is-grouped ">
+                <span class="card-footer-item"> </span>
+                <%= button_to "Sign Up", new_user_registration_path, class: "card-footer-item button has-background-purple is-centered", method: :get %>
+                <span class="card-footer-item"> </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-foot">
+        <div class="content has-text-centered">
+          <p><strong>TrivAI</strong>, created by Jeroen Brinkhorst, Jeske Groenheiden, Floris Reuvers and Leonne Snel. <br>
+            Code is available on <a href="https://github.com/NotAtec/RU_ResearchNDevelopment">GitHub</a></p>
+          <span></span>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
