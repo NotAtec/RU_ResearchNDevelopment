@@ -23,7 +23,7 @@
     TrivAI is a trivia game that uses AI to generate questions based on a given topic. The game is played online, in a 1v1 setting. 
     <br />
     <br />
-    <a href="#">View Demo</a>
+    <a href="https://ru-rnd.herokuapp.com/">View Live Hosted Demo</a>
     ·
     <a href="https://github.com/NotAtec/RU_ResearchNDevelopment/issues">Report Bug</a>
     ·
