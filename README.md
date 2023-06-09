@@ -95,7 +95,7 @@ Before setting up the project, make sure you have the following installed:
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/NotAtec/RU_ResearchNDevelopment.git
+   git clone git@github.com:NotAtec/RU_ResearchNDevelopment.git
    ```
 3. Setup rails dependencies within the project folder
    ```sh
